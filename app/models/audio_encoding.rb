@@ -65,7 +65,7 @@ class AudioEncoding < ActiveRecord::Base
     
       mfile = FFMPEG::Movie.new(master.path)
       mfile.transcode(f.path,{ 
-        :custom             => "-f #{keyparts[1]}",
+        :custom             => %Q!-f #{keyparts[1]} -metadata title="#{self.campaign.metatitle.gsub('"','\"')}"!,
         :audio_codec        => acodec, 
         :audio_sample_rate  => keyparts[2],
         :audio_bitrate      => keyparts[3],

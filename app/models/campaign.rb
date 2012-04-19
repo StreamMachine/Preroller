@@ -3,8 +3,8 @@ class Campaign < ActiveRecord::Base
   end
   
   belongs_to :output
-  has_many :encodings, :class_name => "AudioEncoding"
-
+  has_many :encodings, :class_name => "AudioEncoding", :dependent => :destroy
+  
   scope :active, lambda { where("start_at < ? and end_at > ? and active = 1",Time.now,Time.now) }
   
   #----------

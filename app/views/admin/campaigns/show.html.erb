@@ -1,5 +1,8 @@
 <% @PAGE_TITLE = "#{@campaign.output.key}: #{@campaign.title}"%>
 
+<br/>
+<p><b>Metadata Title:</b> <%= @campaign.metatitle %></b></p>
+
 <table class="table">
 	<thead>
 		<tr>
@@ -60,3 +63,5 @@
 		$("#fileupload").fileupload({url:"<%= upload_admin_campaign_path(@campaign) %>"})
 	<% end %>
 <% end %>
+
+<p><%= link_to "Edit Campaign", edit_admin_campaign_path(@campaign), :class => "btn btn-primary" %></p>

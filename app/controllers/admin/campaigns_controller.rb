@@ -69,6 +69,13 @@ class Admin::CampaignsController < ApplicationController
   #----------
   
   def update
+    if @campaign.update_attributes params[:campaign]
+      flash[:notice] = "Campaign updated!"
+      redirect_to admin_campaign_path @campaign
+    else
+      flash[:error] = "Failed to update campaign: #{@campaign.errors}"
+      render :action => :edit
+    end
     
   end
   

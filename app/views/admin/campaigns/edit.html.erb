@@ -1,6 +1,6 @@
-<% @PAGE_TITLE = "Create a Campaign" %>
+<% @PAGE_TITLE = "Edit Campaign: #{@campaign.title}" %>
 
-<%= semantic_form_for @campaign, :url => admin_campaigns_path, :html => {:class => "form-horizontal"} do |f| %>
+<%= semantic_form_for @campaign, :url => admin_campaign_path(@campaign), :html => {:class => "form-horizontal"} do |f| %>
 <%= f.inputs name:"Campaign" do %>
 		<%= f.input :title %>
 		<%= f.input :metatitle %>
