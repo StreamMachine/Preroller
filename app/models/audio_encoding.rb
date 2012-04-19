@@ -1,4 +1,6 @@
-class AudioEncoding < ActiveRecord::Base  
+class AudioEncoding < ActiveRecord::Base
+  @queue = :preroller
+  
   belongs_to :campaign
 
   #default_scope where("stream_key != 'master'")
@@ -34,6 +36,7 @@ class AudioEncoding < ActiveRecord::Base
     # don't fire if we're already encoded...
     return false if self.path
     
+    Resque.enqueue(AudioEncoding, self.id)
     return true
   end
 
@@ -102,10 +105,17 @@ class AudioEncoding < ActiveRecord::Base
   
   #----------
   
+  def self.perform(id)
+    ae = AudioEncoding.find(id)
+    ae._encode()
+  end
+  
+  #----------
+  
   private
   def delete_cache_and_img
     # delete our file
-    File.delete(self.path) if File.exists?(self.path)
+    File.delete(self.path) if self.path && File.exists?(self.path)
     
     # delete cache?
     

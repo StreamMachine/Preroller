@@ -4,4 +4,7 @@
 
 require File.expand_path('../config/application', __FILE__)
 
+# load in resque tasks
+require 'resque/tasks'
+
 Preroller::Application.load_tasks
