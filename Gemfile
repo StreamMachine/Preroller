@@ -10,6 +10,7 @@ gem 'formtastic-bootstrap', git:'git://github.com/SCPR/formtastic-bootstrap.git'
 #gem "formtastic-bootstrap", path:"/Users/eric/projects/forks/formtastic-bootstrap"
 
 gem "streamio-ffmpeg"
+gem "resque"
 
 gem "redis-store"
 

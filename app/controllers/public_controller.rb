@@ -27,7 +27,8 @@ class PublicController < ApplicationController
       # For instance: mp3-44100-16-64-m, aac-44100-16-48-m, etc
       
       if file = @campaign.file_for_stream_key(params[:stream_key])
-        render :text => file, :status => :ok and return
+        # Got it... send a file
+        send_file file, :disposition => 'inline' and return
       else
         render :text => "No file", :status => :ok and return
       end      
