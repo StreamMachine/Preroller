@@ -88,7 +88,7 @@ class AudioEncoding < ActiveRecord::Base
         f.rewind if f.respond_to?(:rewind)
 
         # now write it into place in our final location
-        File.open(self.path,"w") do |ff|
+        File.open(self.path,"w", :encoding => "ascii-8bit") do |ff|
           ff << f.read()
         end
         

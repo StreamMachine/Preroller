@@ -30,6 +30,23 @@
 	<div class="row-fluid">
 		<div class="span3">
 			<h3>Active Campaigns</h3>
+			
+			<% for o in Output.all %>
+				<h4><%= o.key %></h4>
+				<ul>
+					<% if o.campaigns.active.any? %>
+						<% for c in o.campaigns.active %>
+							<li>
+								<%= link_to c.title, admin_campaign_path(c) %>
+								<br><i>Expires in <%= time_ago_in_words c.end_at %></i>
+							</li>
+						<% end %>
+					<% else %>
+						<li><i>No active campaigns</i></li>
+					<% end %>
+				</ul>
+			<% end %>
+			
 		</div>
 		<div class="span9">
 			<% if @PAGE_TITLE %><h1><%= @PAGE_TITLE %></h1><% end %>

@@ -85,7 +85,7 @@ class Campaign < ActiveRecord::Base
     
     # -- save -- #
     
-    File.open( master.path, "w") do |newf|
+    File.open( master.path, "w", :encoding => "ascii-8bit") do |newf|
       newf << f.read()
     end
     

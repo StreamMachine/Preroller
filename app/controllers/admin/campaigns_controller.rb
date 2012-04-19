@@ -29,12 +29,12 @@ class Admin::CampaignsController < ApplicationController
   
   def upload
     if params[:file]
-      ae.save_file(params[:file])
+      @campaign.save_master_file(params[:file])
       render :text => "Success!", :status => :ok
     else
       render :text => "Must provide an audio file.", :status => :error
     end
-  rescue InvalidAudioError
+  rescue Campaign::InvalidAudioError
     # -- failed -- #
     render :text => "Invalid audio file?", :status => :error
   end          

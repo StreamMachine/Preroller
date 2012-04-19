@@ -51,17 +51,14 @@
 	</table>
 	
 	<h3>Replace Master:</h3>
-	<input id="fileupload" type="file" name="file"/>
-	<% content_for :footerjss do %>
-		$("#fileupload").fileupload({url:"<%= upload_admin_campaign_path(@campaign) %>"})
-	<% end %>
-	
 <% else %>
 	<p>Upload an audio master for this campaign:</p>
-	<input id="fileupload" type="file" name="file"/>
-	<% content_for :footerjss do %>
-		$("#fileupload").fileupload({url:"<%= upload_admin_campaign_path(@campaign) %>"})
-	<% end %>
+
+<% end %>
+
+<input id="fileupload" type="file" name="file"/>
+<% content_for :footerjss do %>
+	$("#fileupload").fileupload({url:"<%= upload_admin_campaign_path(@campaign) %>"})
 <% end %>
 
 <p><%= link_to "Edit Campaign", edit_admin_campaign_path(@campaign), :class => "btn btn-primary" %></p>
