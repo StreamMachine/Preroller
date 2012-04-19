@@ -1,0 +1,62 @@
+<% @PAGE_TITLE = "#{@campaign.output.key}: #{@campaign.title}"%>
+
+<table class="table">
+	<thead>
+		<tr>
+		<th>Status</th>
+		<th>Starts</th>
+		<th>Ends</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td id="active_status"><%= link_to( @campaign.active? ? "Active" : "Paused", toggle_admin_campaign_path(@campaign,:status => @campaign.active), :remote => true, :method => :post ) %></td>
+			<td>
+				<%= @campaign.start_at %>
+				<br/><%= time_ago_in_words @campaign.start_at %> <%= @campaign.start_at > Time.now() ? "from now" : "ago" %>
+			</td>
+			<td>
+				<%= @campaign.end_at %>
+				<br/><%= time_ago_in_words @campaign.end_at %> <%= @campaign.end_at > Time.now() ? "from now" : "ago" %>
+			</td>
+		</tr>		
+	</tbody>
+</table>
+
+<h2>Audio</h2>
+
+<% if @campaign.encodings.master.any? %>	
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Stream Key</th>
+				<th>Size</th>
+				<th>Duration</th>
+				<th>Updated</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for e in @campaign.encodings %>
+			<tr>
+				<td><%= e.stream_key %></td>
+				<td><%= e.size %></td>
+				<td><%= e.duration %></td>
+				<td><%= e.updated_at %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+	
+	<h3>Replace Master:</h3>
+	<input id="fileupload" type="file" name="file"/>
+	<% content_for :footerjss do %>
+		$("#fileupload").fileupload({url:"<%= upload_admin_campaign_path(@campaign) %>"})
+	<% end %>
+	
+<% else %>
+	<p>Upload an audio master for this campaign:</p>
+	<input id="fileupload" type="file" name="file"/>
+	<% content_for :footerjss do %>
+		$("#fileupload").fileupload({url:"<%= upload_admin_campaign_path(@campaign) %>"})
+	<% end %>
+<% end %>

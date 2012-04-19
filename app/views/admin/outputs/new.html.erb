@@ -1,0 +1,9 @@
+<% @PAGE_TITLE = "Create an Output" %>
+
+<%= semantic_form_for @output, :url => admin_outputs_path, :html => {:class => "form-horizontal"} do |f| %>
+	<%= f.inputs name:"Output" do %>
+		<%= f.input :key %>
+		<%= f.input :description, :input_html => { :rows => 5 } %>
+		<%= f.actions %>
+	<% end %>
+<% end %>

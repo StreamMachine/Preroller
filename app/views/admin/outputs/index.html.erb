@@ -1,0 +1,22 @@
+<% @PAGE_TITLE = "Outputs" %>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+		<th>Key</th>
+		<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for o in @outputs %>
+		<tr>
+			<td><%= link_to o.key, admin_output_path(o) %></td>
+			<td><%= o.description %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<p>
+		<%= link_to "Create a new output", new_admin_output_path, :class => "btn btn-primary" %>
+</p>

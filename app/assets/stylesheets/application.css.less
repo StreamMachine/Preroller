@@ -1,0 +1,62 @@
+/*
+ *= require_self
+ *= require "formtastic-bootstrap"
+ */
+
+@import "twitter/bootstrap";
+
+body {
+	position: relative;
+	max-width: 1070px;
+	margin: 0 auto;
+}
+
+form.formtastic, div.formtastic {
+    ol {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .help-inline {
+        color: #999;
+    }
+	
+	.input {
+        margin-bottom: 4px;
+	    
+    	.inline-hints {
+    		color: #777 !important;
+    		font-size: 12px;
+    		margin-top: 2px;
+    		margin-bottom: 2px;
+    	}
+    }
+
+	textarea, input {
+	    width: 96%;
+	}
+	
+	.checkbox input {
+	    width: inherit;
+	}
+		
+	label {
+		font-size: 14px;
+	}
+	
+	ol ol {
+	    background: inherit;
+	    padding: inherit;
+	}
+	
+	li fieldset legend {
+	    font: inherit;
+	    color: inherit;
+	}
+	
+	.required label {
+		font-weight: bold;
+	}
+	
+}

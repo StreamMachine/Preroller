@@ -1,0 +1,29 @@
+<% @PAGE_TITLE = "Campaigns" %>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+		<th>Title</th>
+		<th>Status</th>
+		<th>Start</th>
+		<th>End</th>
+		<th>Output</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for c in @campaigns %>
+		<tr>
+			<td><%= link_to c.title, admin_campaign_path(c) %></td>
+			<td>&nbsp;</td>
+			<td><%= c.start_at %></td>
+			<td><%= c.end_at %></td>
+			<td><%= c.output.key %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+
+
+<p>
+		<%= link_to "Create a new campaign", new_admin_campaign_path, :class => "btn btn-primary" %>
+</p>
