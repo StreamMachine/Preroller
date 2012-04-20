@@ -21,3 +21,9 @@ production:
   database: preroller
   user: preroller
   password: preroller
+
+scprdev:
+	adapter: mysql2
+	database: preroller
+	user: preroller
+	password: preroller
