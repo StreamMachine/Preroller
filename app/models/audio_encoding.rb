@@ -54,17 +54,23 @@ class AudioEncoding < ActiveRecord::Base
     f = Tempfile.new('preroller')
     
     acodec = nil
+    atype = nil
     
     if keyparts[1] == "mp3"
       acodec = "libmp3lame"
+      atype = "mp3"
     elsif keyparts[1] == "aac"
       acodec = "labfaac"
+      atype = "aac"
+    elsif keyparts[1] == "wav"
+      # not sure yet?
+      return false
     end
     
     begin
     
       mfile = FFMPEG::Movie.new(master.path)
-      mfile.transcode(f.path,{ 
+      mfile.transcode(f,{ 
         :custom             => %Q!-f #{keyparts[1]} -metadata title="#{self.campaign.metatitle.gsub('"','\"')}"!,
         :audio_codec        => acodec, 
         :audio_sample_rate  => keyparts[2],
