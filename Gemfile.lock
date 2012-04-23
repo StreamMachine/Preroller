@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/SCPR/streamio-ffmpeg.git
-  revision: 42efc293ea313c4a869e65ae2299ec74294c62ed
+  revision: 31ff4a69d23263fd185c3944a48ec4c294270121
   specs:
     streamio-ffmpeg (0.8.5)
 
