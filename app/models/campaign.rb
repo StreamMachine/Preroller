@@ -69,11 +69,19 @@ class Campaign < ActiveRecord::Base
     # -- find or create master AudioEncoding -- #
     
     master = self.encodings.master.first || self.encodings.create(:stream_key => "master")
-        
+    
+    # grab the extension of the input file
+    ext_match = /\.(\w+)/.match(f.original_filename)
+    
+    ext = nil
+    if ext_match
+      ext = ext_match[1]
+    end
+    
     master.attributes = {
       :size       => snd.size,
       :duration   => snd.duration,
-      :extension  => snd.audio_codec
+      :extension  => ext || snd.audio_codec
     }
         
     # -- get a fingerprint -- #

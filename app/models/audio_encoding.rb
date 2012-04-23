@@ -55,13 +55,16 @@ class AudioEncoding < ActiveRecord::Base
     
     acodec = nil
     atype = nil
+    should_pipe = false
     
     if keyparts[1] == "mp3"
-      acodec = "libmp3lame"
-      atype = "mp3"
+      acodec      = "libmp3lame"
+      atype       = "mp3"
+      should_pipe = true
     elsif keyparts[1] == "aac"
-      acodec = "labfaac"
-      atype = "aac"
+      acodec      = "libfaac"
+      atype       = "mp4"
+      should_pipe = false
     elsif keyparts[1] == "wav"
       # not sure yet?
       return false
@@ -70,8 +73,8 @@ class AudioEncoding < ActiveRecord::Base
     begin
     
       mfile = FFMPEG::Movie.new(master.path)
-      mfile.transcode(f,{ 
-        :custom             => %Q!-f #{keyparts[1]} -metadata title="#{self.campaign.metatitle.gsub('"','\"')}"!,
+      mfile.transcode((should_pipe ? f : f.path),{ 
+        :custom             => %Q!-f #{atype} -metadata title="#{self.campaign.metatitle.gsub('"','\"')}"!,
         :audio_codec        => acodec, 
         :audio_sample_rate  => keyparts[2],
         :audio_bitrate      => keyparts[3],
@@ -86,7 +89,7 @@ class AudioEncoding < ActiveRecord::Base
         self.attributes = {
           :size       => newfile.size,
           :duration   => newfile.duration,
-          :extension  => newfile.audio_codec
+          :extension  => atype || newfile.audio_codec
         }
       
         # grab a fingerprint
