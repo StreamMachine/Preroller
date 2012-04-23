@@ -30,10 +30,10 @@ class PublicController < ApplicationController
         # Got it... send a file
         send_file file, :disposition => 'inline' and return
       else
-        render :text => "No file", :status => :ok and return
+        render :text => "", :status => :ok and return
       end      
     else
-      render :text => "NOPE", :status => :ok and return
+      render :text => "", :status => :ok and return
     end
   end
 end
