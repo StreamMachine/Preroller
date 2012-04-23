@@ -14,6 +14,14 @@
 		
 		<%= link_to "Preroller", admin_root_path, :class => "brand" %>
 		
+		<ul class="nav">
+			<li><%= link_to "Outputs", admin_outputs_path %></li>
+			<li><%= link_to "Campaigns", admin_campaigns_path %></li>
+		</ul>
+
+		<ul class="nav pull-right">
+			<li><%= link_to "Log Out", "", :method => :delete %></li>
+		</ul>
 		</div>
 	</div>
 </div>
@@ -21,7 +29,23 @@
 <div id="content" class="container-fluid">
 	<div class="row-fluid">
 		<div class="span3">
-			&nbsp;
+			<h3>Active Campaigns</h3>
+			
+			<% for o in Output.all %>
+				<h4><%= o.key %></h4>
+				<ul>
+					<% if o.campaigns.active.any? %>
+						<% for c in o.campaigns.active %>
+							<li>
+								<%= link_to c.title, admin_campaign_path(c) %>
+								<br><i>Expires in <%= time_ago_in_words c.end_at %></i>
+							</li>
+						<% end %>
+					<% else %>
+						<li><i>No active campaigns</i></li>
+					<% end %>
+				</ul>
+			<% end %>
 			
 		</div>
 		<div class="span9">

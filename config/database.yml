@@ -27,3 +27,11 @@ scprdev:
   database: preroller
   username: preroller
   password: preroller
+  
+mercer:
+  adapter: mysql2
+  database: mercer_new
+  username: mercer
+  password: merc123lkjzxc
+  host: 10.226.4.229
+  port: 3306

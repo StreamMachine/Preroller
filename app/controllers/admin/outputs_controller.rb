@@ -1,5 +1,8 @@
 class Admin::OutputsController < ApplicationController
   
+  before_filter :authenticate_user!
+  layout "admin"
+  
   before_filter :load_output, :except => [:index,:new,:create]
   
   def index
