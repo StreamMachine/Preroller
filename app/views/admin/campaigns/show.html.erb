@@ -56,9 +56,22 @@
 
 <% end %>
 
+<div id="after_upload" class="alert alert-success" style="display:none">
+	<strong>Success!</strong> New master audio file was uploaded.  Reload this page to
+	see the new outputs.
+</div>
+
 <input id="fileupload" type="file" name="file"/>
 <% content_for :footerjss do %>
-	$("#fileupload").fileupload({url:"<%= upload_admin_campaign_path(@campaign) %>"})
+	$("#fileupload").fileupload({
+		url: "<%= upload_admin_campaign_path(@campaign) %>",
+		done: function (e,data) {
+			console.log("data is ", data);
+			if (data.textStatus == "success") {
+				$("#after_upload").show()
+			}
+		}
+	})
 <% end %>
 
 <p><%= link_to "Edit Campaign", edit_admin_campaign_path(@campaign), :class => "btn btn-primary" %></p>
