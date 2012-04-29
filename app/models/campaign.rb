@@ -60,7 +60,7 @@ class Campaign < ActiveRecord::Base
   def save_master_file(f)
     # -- make sure it's a valid audio file -- #
     
-    snd = FFMPEG::Movie.new(f)
+    snd = FFMPEG::Movie.new(f.path)
         
     if !snd.valid?
       raise InvalidAudioError
