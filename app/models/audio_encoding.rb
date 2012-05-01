@@ -71,10 +71,14 @@ class AudioEncoding < ActiveRecord::Base
     end
     
     begin
-    
+      flag = nil
+      if atype == "mp3"
+        flag = "-flags2 -reservoir"
+      end
+      
       mfile = FFMPEG::Movie.new(master.path)
       mfile.transcode((should_pipe ? f : f.path),{ 
-        :custom             => %Q!-f #{atype} -metadata title="#{self.campaign.metatitle.gsub('"','\"')}"!,
+        :custom             => %Q!-f #{atype} #{flag} -metadata title="#{self.campaign.metatitle.gsub('"','\"')}"!,
         :audio_codec        => acodec, 
         :audio_sample_rate  => keyparts[2],
         :audio_bitrate      => keyparts[3],
