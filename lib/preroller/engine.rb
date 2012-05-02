@@ -21,7 +21,7 @@ module Preroller
     # -- Set the Resque Queue -- #
     
     config.after_initialize do
-      Preroller::AudioEncoding.instance_variable_set :@queue, Rails.application.config.preroller.resque_queue
+      Preroller::AudioEncoding.instance_variable_set :@queue, Rails.application.config.preroller.resque_queue || "preroller"
     end
     
     # -- Add Resque rake tasks -- #

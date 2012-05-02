@@ -7,6 +7,8 @@ module Preroller
     has_many :encodings, :class_name => "AudioEncoding", :dependent => :destroy
   
     scope :active, lambda { where("start_at < ? and end_at > ? and active = 1",Time.now,Time.now) }
+    
+    attr_accessible :title, :metatitle, :output_id, :start_at, :end_at, :path_filter, :ua_filter
   
     #----------
   

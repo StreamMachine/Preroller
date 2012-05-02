@@ -10,6 +10,8 @@ module Preroller
     before_destroy :delete_cache_and_img
   
     STREAM_KEY_REGEX = /^(mp3|aac)-(44100|22050)-(32|48|64|96|128)-(m|s)$/
+    
+    attr_accessible :stream_key, :size, :duration, :extension
   
     def path
       if self.fingerprint
