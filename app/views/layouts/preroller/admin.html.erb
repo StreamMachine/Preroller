@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @PAGE_TITLE ? @PAGE_TITLE + " | Preroller" : "Preroller | Dashboard" %></title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application", "preroller/application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="navbar">
+	<div class="navbar-inner">
+		<div class="container-fluid">
+		
+		<%= link_to "Preroller", admin_root_path, :class => "brand" %>
+		
+		<ul class="nav">
+			<li><%= link_to "Outputs", admin_outputs_path %></li>
+			<li><%= link_to "Campaigns", admin_campaigns_path %></li>
+		</ul>
+
+		<ul class="nav pull-right">
+			<li><%= link_to "Log Out", "", :method => :delete %></li>
+		</ul>
+		</div>
+	</div>
+</div>
+
+<div id="content" class="container-fluid">
+	<div class="row-fluid">
+		<div class="span3">
+			<h3>Active Campaigns</h3>
+			
+			<% for o in Preroller::Output.all %>
+				<h4><%= o.key %></h4>
+				<ul>
+					<% if o.campaigns.active.any? %>
+						<% for c in o.campaigns.active %>
+							<li>
+								<%= link_to c.title, admin_campaign_path(c) %>
+								<br><i>Expires in <%= time_ago_in_words c.end_at %></i>
+							</li>
+						<% end %>
+					<% else %>
+						<li><i>No active campaigns</i></li>
+					<% end %>
+				</ul>
+			<% end %>
+			
+		</div>
+		<div class="span9">
+			<% if @PAGE_TITLE %><h1><%= @PAGE_TITLE %></h1><% end %>
+			
+			<% if flash[:notice] %>
+				<div class="alert alert-success"><%= flash[:notice] %></div>
+			<% end %>
+			
+			<% if flash[:error] %>
+				<div class="alert alert-error"><%= flash[:error] %></div>				
+			<% end %>
+			
+			<%= yield %>			
+		</div>
+	</div>
+	<br class="clear"/>
+	<br/>
+</div>
+
+</body>
+<script type="text/javascript">
+<%= yield :footerjss %>
+</script>
+</html>

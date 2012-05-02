@@ -1,6 +1,4 @@
-Preroller::Application.routes.draw do
-  devise_for :users
-  
+Preroller::Engine.routes.draw do
   namespace :admin do
     resources :outputs
     
