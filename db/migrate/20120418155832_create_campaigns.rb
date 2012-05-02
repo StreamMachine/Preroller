@@ -1,6 +1,6 @@
 class CreateCampaigns < ActiveRecord::Migration
   def change
-    create_table :campaigns do |t|
+    create_table :preroller_campaigns do |t|
       t.string :title, :null => false
       t.string :metatitle
       t.boolean :active, :null => false, :default => false
@@ -10,6 +10,6 @@ class CreateCampaigns < ActiveRecord::Migration
       t.timestamps
     end
     
-    add_index(:campaigns, :output_id)
+    add_index(:preroller_campaigns, :output_id)
   end
 end

@@ -1,6 +1,6 @@
 class CreateAudioEncodings < ActiveRecord::Migration
   def change
-    create_table :audio_encodings do |t|
+    create_table :preroller_audio_encodings do |t|
       t.belongs_to :campaign, :null => false
       t.string :stream_key, :null => false
       t.string :fingerprint, :extension
@@ -9,6 +9,6 @@ class CreateAudioEncodings < ActiveRecord::Migration
       t.timestamps
     end
     
-    add_index(:audio_encodings, [:campaign_id,:stream_key], :unique => true)
+    add_index(:preroller_audio_encodings, [:campaign_id,:stream_key], :unique => true)
   end
 end
